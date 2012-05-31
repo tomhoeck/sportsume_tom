@@ -2,6 +2,20 @@ SportsumeTom::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
+  devise_for :users, :path_names => { :sign_up => "register" }, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
+  devise_scope :user do
+    get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
+  end
+
+  root :to => 'users#new'
+
+
+
+
+  
+
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
